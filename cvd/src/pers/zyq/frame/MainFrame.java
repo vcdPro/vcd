@@ -11,11 +11,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
-
+	private JDesktopPane desktopPane = new JDesktopPane();
 	/**
 	 * Create the frame.
 	 */
@@ -32,6 +34,13 @@ public class MainFrame extends JFrame {
 		menuBar.add(usermenu);
 		
 		JMenuItem userAddItem = new JMenuItem("\u7528\u6237\u6CE8\u518C");
+		userAddItem.addActionListener(new ActionListener() {//”√ªß◊¢≤·œÏ”¶
+			public void actionPerformed(ActionEvent e) {
+				UserReg reg=new UserReg();
+				reg.setVisible(true);
+				desktopPane.add(reg);
+			}
+		});
 		usermenu.add(userAddItem);
 		
 		JMenuItem userModifyItem = new JMenuItem("\u7528\u6237\u7BA1\u7406");
@@ -59,7 +68,6 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBackground(Color.BLUE);
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 	}

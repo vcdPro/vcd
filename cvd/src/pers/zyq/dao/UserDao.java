@@ -1,8 +1,8 @@
 package pers.zyq.dao;
 
-import pers.zyq.domain.User;
+import pers.zyq.domain.Admin;
 
 public interface UserDao {
 
-	public User findUser(String name);
+	public Admin findAdmin(String name);
 }

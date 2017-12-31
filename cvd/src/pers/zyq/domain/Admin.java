@@ -2,17 +2,17 @@ package pers.zyq.domain;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class Admin implements Serializable {
 
 	private int id;
 	private String name;
 	private String password;
 	
-	public User() {
+	public Admin() {
 		super();
 	}
 
-	private User(String name, String password) {
+	private Admin(String name, String password) {
 		super();
 		this.name = name;
 		this.password = password;

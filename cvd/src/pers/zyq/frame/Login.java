@@ -1,4 +1,4 @@
-package pers.zyq.frame;
+	package pers.zyq.frame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -19,7 +19,7 @@ import javax.swing.JPasswordField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
-import pers.zyq.domain.User;
+import pers.zyq.domain.Admin;
 import pers.zyq.factory.BasicFactory;
 import pers.zyq.service.UserService;
 
@@ -96,9 +96,9 @@ public class Login extends JFrame {
 					userPwd.requestFocus();
 					return;
 				}
-				User user=service.findUser(nameTxt);
-				if( user!= null){
-					if(!user.getPassword().equals(pwdTxt)){
+				Admin admin=service.findAdmin(nameTxt);
+				if( admin!= null){
+					if(!admin.getPassword().equals(pwdTxt)){
 						JOptionPane.showMessageDialog(null, "√‹¬Î¥ÌŒÛ");
 						userPwd.requestFocus();
 					}

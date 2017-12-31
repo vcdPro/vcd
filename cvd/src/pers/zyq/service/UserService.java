@@ -1,13 +1,12 @@
 package pers.zyq.service;
 
-import pers.zyq.domain.User;
+import pers.zyq.domain.Admin;
 
 public interface UserService {
 	/**
-	 * 查询用户名密码
-	 * @param userName
-	 * @param password
+	 * 查询管理员用户名密码
+	 * @param Name
 	 * @return 
 	 */
-	public User findUser( String name);
+	public Admin findAdmin( String name);
 }
