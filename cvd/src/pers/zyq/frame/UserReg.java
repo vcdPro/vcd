@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import java.awt.Font;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -20,11 +21,16 @@ import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 
+import pers.zyq.domain.User;
 import pers.zyq.factory.BasicFactory;
 import pers.zyq.service.UserService;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserReg extends JInternalFrame {
 	private JTextField nameTxt;
@@ -82,6 +88,26 @@ public class UserReg extends JInternalFrame {
 				if(famalebtn.isSelected()){
 					sex="女";
 				}
+				String idcard=idcardTxt.getText();
+				String phone=phoneTxt.getText();
+				if(testidcard(idcard)&&testphone(phone)&&testsex(sex)){
+					User user=new User(name,sex, idcard, phone);
+					System.out.println(name);
+					while(service.UserReg(user)!=-1){
+						JOptionPane.showMessageDialog(null, "注册成功");
+					}
+				}
+				else if(!testidcard(idcard)){
+					 JOptionPane.showMessageDialog(null, "身份证格式不正确");		
+					 requestFocus(true);
+					 return;
+				}
+				if(!testphone(phone)){
+					 JOptionPane.showMessageDialog(null, "手机号码格式不正确");	
+					 requestFocus(true);
+					 return;
+				}
+				return;
 			}
 		});
 		regbtn.setFont(new Font("宋体", Font.PLAIN, 15));
@@ -140,5 +166,31 @@ public class UserReg extends JInternalFrame {
 		);
 		getContentPane().setLayout(groupLayout);
 
+	}
+	protected boolean testsex(String sex) {
+		// TODO 自动生成的方法存根
+		if("".equals(sex)||sex.isEmpty()){
+			JOptionPane.showMessageDialog(null, "性別未勾选");
+			return false;
+		}
+		return true;
+	}
+	protected boolean testphone(String phone) {
+		// TODO 自动生成的方法存根
+		 Pattern p = Pattern.compile("^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$");
+		 Matcher m = p.matcher(phone);
+		 if(!m.matches()){			
+			 return false;
+		 }
+		 return true;
+	}
+	protected boolean testidcard(String idcard) {
+		// TODO 自动生成的方法存根
+		 Pattern p = Pattern.compile("(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x)$)");
+		 Matcher m = p.matcher(idcard);
+		 if(!m.matches()){
+			 return false;
+		 }
+		 return true;
 	}
 }
