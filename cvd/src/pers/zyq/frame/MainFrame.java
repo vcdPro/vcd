@@ -43,9 +43,6 @@ public class MainFrame extends JFrame {
 		});
 		usermenu.add(userAddItem);
 		
-		JMenuItem userModifyItem = new JMenuItem("\u7528\u6237\u7BA1\u7406");
-		usermenu.add(userModifyItem);
-		
 		JMenu cdmenu = new JMenu("\u5F71\u789F\u7BA1\u7406");
 		menuBar.add(cdmenu);
 		

@@ -27,11 +27,11 @@ public class UserDaoImp implements UserDao {
 		}
 	}
 
-	public User findUser() {
-		String sql="select * from User_t where name=?";
+	public User findUser(User user) {
+		String sql="select * from User_t where name=? or idcard=? ";
 		QueryRunner runner=new QueryRunner(DbUtil.getSource());
 		try {
-			return runner.query(sql, new BeanHandler<User>(User.class));
+			return runner.query(sql, new BeanHandler<User>(User.class),user.getName(),user.getIdcard());
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
