@@ -92,8 +92,7 @@ public class UserReg extends JInternalFrame {
 				String phone=phoneTxt.getText();
 				if(testidcard(idcard)&&testphone(phone)&&testsex(sex)){
 					User user=new User(name,sex, idcard, phone);
-					System.out.println(name);
-					while(service.UserReg(user)!=-1){
+					if(service.UserReg(user)!=-1){
 						JOptionPane.showMessageDialog(null, "×¢²á³É¹¦");
 					}
 				}

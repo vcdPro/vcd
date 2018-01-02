@@ -8,5 +8,5 @@ public interface UserDao {
 	public Admin findAdmin(String name);
 
 	public int UserReg(User user);
-	public User findUser();
+	public User findUser(User user);
 }
