@@ -32,7 +32,7 @@ import java.awt.event.FocusEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserReg extends JInternalFrame {
+public class UserRegFrame extends JInternalFrame {
 	private JTextField nameTxt;
 	private JTextField idcardTxt;
 	private JTextField phoneTxt;
@@ -42,7 +42,7 @@ public class UserReg extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserReg() {
+	public UserRegFrame() {
 		setTitle("\u7528\u6237\u6CE8\u518C");
 		setClosable(true);
 		setBounds(100, 100, 525, 360);
@@ -94,6 +94,7 @@ public class UserReg extends JInternalFrame {
 					User user=new User(name,sex, idcard, phone);
 					if(service.UserReg(user)!=-1){
 						JOptionPane.showMessageDialog(null, "注册成功");
+						resetvalue();
 					}
 				}
 				else if(!testidcard(idcard)){
@@ -165,6 +166,14 @@ public class UserReg extends JInternalFrame {
 		);
 		getContentPane().setLayout(groupLayout);
 
+	}
+	protected void resetvalue() {
+		// TODO 自动生成的方法存根
+		nameTxt.setText("");
+		idcardTxt.setText("");
+		phoneTxt.setText("");
+		malebtn.setSelected(false);
+		famalebtn.setSelected(false);
 	}
 	protected boolean testsex(String sex) {
 		// TODO 自动生成的方法存根

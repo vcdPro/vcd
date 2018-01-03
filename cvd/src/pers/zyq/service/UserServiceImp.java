@@ -1,5 +1,7 @@
 package pers.zyq.service;
 
+import java.lang.reflect.Type;
+
 import javax.swing.JOptionPane;
 
 import pers.zyq.dao.UserDao;
@@ -8,10 +10,9 @@ import pers.zyq.domain.User;
 import pers.zyq.factory.BasicFactory;
 
 public class UserServiceImp implements UserService {
-
+	private UserDao dao=BasicFactory.getFactory().getInstance(UserDao.class);
 	public Admin findAdmin(String name) {
 		// TODO 自动生成的方法存根
-		UserDao dao=BasicFactory.getFactory().getInstance(UserDao.class);
 		Admin admin=dao.findAdmin(name);
 		if(admin.getName().equals(name)){
 			return admin;
@@ -25,7 +26,6 @@ public class UserServiceImp implements UserService {
 	 */
 	public int UserReg(User user) {
 		// TODO 自动生成的方法存根
-		UserDao dao=BasicFactory.getFactory().getInstance(UserDao.class);
 		User user1=dao.findUser(user);
 		if(dao.findUser(user) != null){
 			if(user.getName().equals(user1.getName())){
@@ -43,5 +43,6 @@ public class UserServiceImp implements UserService {
 		
 	
 	}
+
 
 }
