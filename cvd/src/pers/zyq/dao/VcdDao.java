@@ -1,11 +1,23 @@
 package pers.zyq.dao;
 
-import java.lang.reflect.Type;
+import java.util.List;
+
+import pers.zyq.domain.Vcd;
+import pers.zyq.domain.VcdType;
 
 public interface VcdDao {
 
-	Type findType(String typename);
+	VcdType findType(VcdType type);
 
-	int addType(String typename, String desc);
+
+	List<VcdType> query(String condition);
+
+	int updateType(VcdType type);
+
+	List<Vcd> findVcd(int typeid);
+
+	int delType(int typeid);
+
+	int addType(VcdType type);
 
 }

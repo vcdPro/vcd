@@ -56,14 +56,15 @@ public class MainFrame extends JFrame {
 		});
 		menu.add(addTypeItem);
 		
-		JMenu menu_1 = new JMenu("\u7C7B\u522B\u7EF4\u62A4");
-		menu.add(menu_1);
-		
-		JMenuItem typemodify = new JMenuItem("\u7C7B\u522B\u4FEE\u6539");
-		menu_1.add(typemodify);
-		
-		JMenuItem typedel = new JMenuItem("\u7C7B\u522B\u5220\u9664");
-		menu_1.add(typedel);
+		JMenuItem modTypeItem = new JMenuItem("\u7C7B\u522B\u7EF4\u62A4");
+		modTypeItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModTypeFrame modTF=new ModTypeFrame();
+				modTF.setVisible(true);
+				desktopPane.add(modTF);
+			}
+		});
+		menu.add(modTypeItem);
 		
 		JMenu cdmenu = new JMenu("\u5F71\u789F\u7BA1\u7406");
 		menuBar.add(cdmenu);

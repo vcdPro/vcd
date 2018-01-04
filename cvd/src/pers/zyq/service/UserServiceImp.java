@@ -1,7 +1,5 @@
 package pers.zyq.service;
 
-import java.lang.reflect.Type;
-
 import javax.swing.JOptionPane;
 
 import pers.zyq.dao.UserDao;
@@ -14,7 +12,7 @@ public class UserServiceImp implements UserService {
 	public Admin findAdmin(String name) {
 		// TODO 自动生成的方法存根
 		Admin admin=dao.findAdmin(name);
-		if(admin.getName().equals(name)){
+		if(admin!=null&&admin.getName().equals(name)){
 			return admin;
 		}
 		return null;

@@ -1,7 +1,5 @@
 package pers.zyq.service;
 
-import java.lang.reflect.Type;
-
 import pers.zyq.domain.Admin;
 import pers.zyq.domain.User;
 

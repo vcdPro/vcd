@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
+import pers.zyq.domain.VcdType;
 import pers.zyq.factory.BasicFactory;
 import pers.zyq.service.VcdService;
 
@@ -45,12 +46,13 @@ public class AddTypeFrame extends JInternalFrame {
 				VcdService service=BasicFactory.getFactory().getInstance(VcdService.class);
 				String typename=typeTxt.getText();
 				String desc=descTxt.getText();
+				VcdType type=new VcdType(typename,desc);
 				if("".equals(typename)||typename.isEmpty()){
 					JOptionPane.showMessageDialog(null, "类别名不可为空");
 					typeTxt.requestFocus(true);
 					return;
 				}else{
-					if(service.addType( typename,desc) >0){
+					if(service.addType( type) >0){
 						JOptionPane.showMessageDialog(null, "添加成功");
 						resetvalue();
 					}
