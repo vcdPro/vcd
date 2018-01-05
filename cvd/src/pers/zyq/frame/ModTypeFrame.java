@@ -44,6 +44,7 @@ public class ModTypeFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ModTypeFrame() {
+		setIconifiable(true);
 		setClosable(true);
 		setTitle("\u7C7B\u522B\u7EF4\u62A4");
 		setBounds(100, 100, 526, 605);
@@ -55,10 +56,7 @@ public class ModTypeFrame extends JInternalFrame {
 		JButton button = new JButton("\u67E5\u8BE2");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VcdService service=BasicFactory.getFactory().getInstance(VcdService.class);
-				String condition=conTxt.getText();
-				List<VcdType> list=service.query(condition);
-				fillTable(list);
+				query(e);
 			}
 		});
 		button.setFont(new Font("宋体", Font.PLAIN, 15));
@@ -95,6 +93,7 @@ public class ModTypeFrame extends JInternalFrame {
 				int n=service.updateType(type);
 				if(n==1){
 					resetValue();
+					query(e);
 				}
 			}
 		});
@@ -107,6 +106,7 @@ public class ModTypeFrame extends JInternalFrame {
 				int id=Integer.parseInt(idTxt.getText());
 				if(service.delType(id)==1){
 					resetValue();
+					query(e);
 				}
 			}
 		});
@@ -199,6 +199,14 @@ public class ModTypeFrame extends JInternalFrame {
 		scrollPane.setViewportView(table);
 		getContentPane().setLayout(groupLayout);
 
+	}
+
+	protected void query(ActionEvent e) {
+		// TODO 自动生成的方法存根
+		VcdService service=BasicFactory.getFactory().getInstance(VcdService.class);
+		String condition=conTxt.getText();
+		List<VcdType> list=service.query(condition);
+		fillTable(list);
 	}
 
 	protected void resetValue() {
