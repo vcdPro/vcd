@@ -43,6 +43,16 @@ public class MainFrame extends JFrame {
 		});
 		usermenu.add(userAddItem);
 		
+		JMenuItem menuItem_2 = new JMenuItem("\u7528\u6237\u7EF4\u62A4");
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserModFrame umf=new UserModFrame();
+				umf.setVisible(true);
+				desktopPane.add(umf);
+			}
+		});
+		usermenu.add(menuItem_2);
+		
 		JMenu menu = new JMenu("\u5F71\u789F\u7C7B\u522B\u7BA1\u7406");
 		menuBar.add(menu);
 		
@@ -72,14 +82,8 @@ public class MainFrame extends JFrame {
 		JMenuItem addItem = new JMenuItem("\u5F71\u789F\u5165\u5E93");
 		cdmenu.add(addItem);
 		
-		JMenu menu_2 = new JMenu("\u5F71\u789F\u7EF4\u62A4");
-		cdmenu.add(menu_2);
-		
-		JMenuItem vcdmodify = new JMenuItem("\u5F71\u789F\u4FE1\u606F\u4FEE\u6539");
-		menu_2.add(vcdmodify);
-		
-		JMenuItem vcddel = new JMenuItem("\u5F71\u789F\u5220\u9664");
-		menu_2.add(vcddel);
+		JMenuItem menuItem = new JMenuItem("\u5F71\u789F\u7EF4\u62A4");
+		cdmenu.add(menuItem);
 		
 		JMenu cdbrmenu = new JMenu("\u5F71\u789F\u501F\u9605\u4E0E\u5F52\u8FD8");
 		menuBar.add(cdbrmenu);

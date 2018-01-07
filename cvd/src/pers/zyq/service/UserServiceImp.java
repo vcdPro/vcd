@@ -1,5 +1,7 @@
 package pers.zyq.service;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import pers.zyq.dao.UserDao;
@@ -41,6 +43,28 @@ public class UserServiceImp implements UserService {
 		return 0;
 		
 	
+	}
+
+	@Override
+	public List<User> query(String condition) {
+		List<User> list=dao.query(condition);
+		if(list.size()==0){
+			JOptionPane.showMessageDialog(null, "该查询条件下无内容");
+			return list;
+		}
+		return list;
+	}
+
+	@Override
+	public int update(User user) {
+		// TODO 自动生成的方法存根
+		return dao.update(user);
+	}
+
+	@Override
+	public int delUser(int id) {
+		// TODO 自动生成的方法存根
+			return dao.delUser(id);
 	}
 
 

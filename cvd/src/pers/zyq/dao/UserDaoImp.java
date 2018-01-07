@@ -1,9 +1,11 @@
 package pers.zyq.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import pers.zyq.domain.Admin;
 import pers.zyq.domain.User;
@@ -50,6 +52,49 @@ public class UserDaoImp implements UserDao {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public List<User> query(String condition) {
+		// TODO 自动生成的方法存根
+		String sql="select * from User_t where name like '%"+condition+"%' or idcard like '%"+condition+"%' or phone like'%"+condition+"%'";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.query(sql, new BeanListHandler<User>(User.class));
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public int update(User user) {
+		// TODO 自动生成的方法存根
+		String sql="update User_t set password=? , phone=? where id=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.update(sql,user.getPassword(),user.getPhone(),user.getId());
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public int delUser(int id) {
+		// TODO 自动生成的方法存根
+		String sql="delete  from User_t where id=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.update(sql, id);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+		
 	}
 
 	

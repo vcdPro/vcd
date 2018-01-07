@@ -14,6 +14,14 @@ public class User {
 	public User() {
 		super();
 	}
+	
+	public User(int id, String password, String phone) {
+		super();
+		this.id=id;
+		this.password = password;
+		this.phone = phone;
+	}
+
 	public User(String name, String sex, String idcard,String phone) {
 		super();
 		this.name = name;
@@ -21,6 +29,7 @@ public class User {
 		this.idcard = idcard;
 		this.phone = phone;
 	}
+	
 	public int getId() {
 		return id;
 	}
