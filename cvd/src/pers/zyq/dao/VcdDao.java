@@ -14,10 +14,19 @@ public interface VcdDao {
 
 	int updateType(VcdType type);
 
-	List<Vcd> findVcd(int typeid);
+	List<Vcd> findVcdById(int typeid);
 
 	int delType(int typeid);
 
 	int addType(VcdType type);
+
+
+	Vcd findVcd(Vcd vcd);
+
+
+	int updateVcd(Vcd vcd);
+
+
+	int addVcd(Vcd vcd);
 
 }

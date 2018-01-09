@@ -80,6 +80,13 @@ public class MainFrame extends JFrame {
 		menuBar.add(cdmenu);
 		
 		JMenuItem addItem = new JMenuItem("\u5F71\u789F\u5165\u5E93");
+		addItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddVcdFrame avf=new AddVcdFrame();
+				avf.setVisible(true);
+				desktopPane.add(avf);
+			}
+		});
 		cdmenu.add(addItem);
 		
 		JMenuItem menuItem = new JMenuItem("\u5F71\u789F\u7EF4\u62A4");

@@ -48,7 +48,7 @@ public class VcdServiceImp implements VcdService {
 	@Override
 	public int delType(int typeid) {
 		// TODO 自动生成的方法存根
-		List<Vcd> list=dao.findVcd(typeid);
+		List<Vcd> list=dao.findVcdById(typeid);
 		if(list.size()!=0){
 			JOptionPane.showMessageDialog(null, "该类下尚有影碟，不可删除！");
 			return 0;
@@ -62,5 +62,26 @@ public class VcdServiceImp implements VcdService {
 			}
 		}
 		return 0;
+	}
+	@Override
+	public int addVcd(Vcd vcd) {
+		// TODO 自动生成的方法存根
+		Vcd vcd1=dao.findVcd(vcd);
+		if(vcd1!=null){
+			int n=JOptionPane.showConfirmDialog(null, "该影碟已存在，是否确认修改信息？");
+			if(n==0){
+				vcd.setId(vcd1.getId());
+			return dao.updateVcd(vcd);
+			}
+		}
+		return dao.addVcd(vcd);
+	}
+	@Override
+	public int findVcd(Vcd vcd) {
+		// TODO 自动生成的方法存根
+		vcd=dao.findVcd(vcd);
+		if(vcd!=null)
+			return vcd.getNownum();
+		else return 0;
 	}
 }

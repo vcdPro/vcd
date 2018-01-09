@@ -10,6 +10,13 @@ public class VcdType {
 		super();
 		// TODO 自动生成的构造函数存根
 	}
+	
+	public VcdType(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	public VcdType(String name, String description) {
 		super();
 		this.name = name;
@@ -39,5 +46,9 @@ public class VcdType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	@Override
+	public String toString() {
+		// TODO 自动生成的方法存根
+		return name;
+	}
 }

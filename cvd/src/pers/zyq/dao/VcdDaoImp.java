@@ -70,7 +70,7 @@ public class VcdDaoImp implements VcdDao {
 	}
 
 
-	public List<Vcd> findVcd(int typeid) {
+	public List<Vcd> findVcdById(int typeid) {
 		// TODO 自动生成的方法存根
 		String sql="select * from VCD_t where id =?";
 		QueryRunner runner=new QueryRunner(DbUtil.getSource());
@@ -95,6 +95,48 @@ public class VcdDaoImp implements VcdDao {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public Vcd findVcd(Vcd vcd) {
+		// TODO 自动生成的方法存根
+		String sql="select * from Vcd_t where name=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.query(sql, new BeanHandler<Vcd>(Vcd.class),vcd.getName());
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public int updateVcd(Vcd vcd) {
+		// TODO 自动生成的方法存根
+		String sql="update VCD_t set name=? , typeid=? , nownum=? , star=? , price=? , url=? , imageurl=? where id=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.update(sql, vcd.getName(),vcd.getTypeid(),vcd.getNownum(),vcd.getStar(),vcd.getPrice(),vcd.getUrl(),vcd.getImageurl(),vcd.getId());
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public int addVcd(Vcd vcd) {
+		// TODO 自动生成的方法存根
+		String sql="insert into Vcd_t (name, typeid, nownum, star, price, url, imageurl) values (?,?,?,?,?,?,?)";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.update(sql, vcd.getName(),vcd.getTypeid(),vcd.getNownum(),vcd.getStar(),vcd.getPrice(),vcd.getUrl(),vcd.getImageurl());
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
 		}
 	}
 
