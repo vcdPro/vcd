@@ -67,5 +67,16 @@ public class UserServiceImp implements UserService {
 			return dao.delUser(id);
 	}
 
+	@Override
+	public int findUser(User user) {
+		// TODO 自动生成的方法存根
+		User user1=dao.findUser(user);
+		if(user1 == null){
+			JOptionPane.showMessageDialog(null, "该用户名尚未注册，请前往注册！");
+			return 0;
+			}
+		return user1.getId();
+	}
+
 
 }

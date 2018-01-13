@@ -2,6 +2,7 @@ package pers.zyq.dao;
 
 import java.util.List;
 
+import pers.zyq.domain.Record;
 import pers.zyq.domain.Vcd;
 import pers.zyq.domain.VcdType;
 
@@ -14,7 +15,7 @@ public interface VcdDao {
 
 	int updateType(VcdType type);
 
-	List<Vcd> findVcdById(int typeid);
+	List<Vcd> findVcdByTypeId(int typeid);
 
 	int delType(int typeid);
 
@@ -28,5 +29,23 @@ public interface VcdDao {
 
 
 	int addVcd(Vcd vcd);
+
+
+	List<Vcd> queryVcd(String con);
+
+
+	VcdType getType(int id);
+
+
+	List<Record> findVcdByState(int id);
+
+
+	int delVcd(int vcdid);
+
+
+	int getNumById(int vcdid);
+
+
+	void updateVcdNum(Record record);
 
 }

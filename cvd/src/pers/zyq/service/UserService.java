@@ -21,5 +21,7 @@ public interface UserService {
 
 	public int delUser(int id);
 
+	public int findUser(User user);
+
 
 }

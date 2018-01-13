@@ -90,12 +90,26 @@ public class MainFrame extends JFrame {
 		cdmenu.add(addItem);
 		
 		JMenuItem menuItem = new JMenuItem("\u5F71\u789F\u7EF4\u62A4");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModVcdFrame mvf=new ModVcdFrame();
+				mvf.setVisible(true);
+				desktopPane.add(mvf);
+			}
+		});
 		cdmenu.add(menuItem);
 		
 		JMenu cdbrmenu = new JMenu("\u5F71\u789F\u501F\u9605\u4E0E\u5F52\u8FD8");
 		menuBar.add(cdbrmenu);
 		
 		JMenuItem cdBoItem = new JMenuItem("\u5F71\u789F\u501F\u9605");
+		cdBoItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentFrame rf=new RentFrame();
+				rf.setVisible(true);
+				desktopPane.add(rf);
+			}
+		});
 		cdbrmenu.add(cdBoItem);
 		
 		JMenuItem menuItem_1 = new JMenuItem("\u5F71\u789F\u5F52\u8FD8");

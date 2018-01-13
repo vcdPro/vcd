@@ -1,12 +1,15 @@
 package pers.zyq.dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import pers.zyq.domain.Record;
 import pers.zyq.domain.Vcd;
 import pers.zyq.domain.VcdType;
 import pers.zyq.util.DbUtil;
@@ -70,9 +73,9 @@ public class VcdDaoImp implements VcdDao {
 	}
 
 
-	public List<Vcd> findVcdById(int typeid) {
+	public List<Vcd> findVcdByTypeId(int typeid) {
 		// TODO 自动生成的方法存根
-		String sql="select * from VCD_t where id =?";
+		String sql="select * from VCD_t where typeid =?";
 		QueryRunner runner=new QueryRunner(DbUtil.getSource());
 		try {
 			return runner.query(sql, new BeanListHandler<Vcd>(Vcd.class),typeid);
@@ -138,6 +141,114 @@ public class VcdDaoImp implements VcdDao {
 			e.printStackTrace();
 			throw new RuntimeException();
 		}
+	}
+
+	@Override
+	public List<Vcd> queryVcd(String con) {
+		// TODO 自动生成的方法存根
+		String sql="select * from VCD_t where name like '%"+con+"%'"+" or star like '%"+con+"%'";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.query(sql, new BeanListHandler<Vcd>(Vcd.class));
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public VcdType getType(int id) {
+		// TODO 自动生成的方法存根
+		String sql="select * from Type_t where id =? ";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.query(sql, new BeanHandler <VcdType>(VcdType.class),id);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public List<Record> findVcdByState(int id) {
+		// TODO 自动生成的方法存根
+		String sql="select * from Record_t where vcdid=? and state=1";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.query(sql, new BeanListHandler<Record>(Record.class),id);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public int delVcd(int id) {
+		// TODO 自动生成的方法存根
+		String sql="delete from VCD_t where id=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+	 	try {
+			return runner.update(sql,id);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public int getNumById(int vcdid) {
+		// TODO 自动生成的方法存根
+		String sql="select nownum from VCD_t where id=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return (Integer) runner.query(sql, new ScalarHandler(),vcdid);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public void updateVcdNum(Record record) {
+		// TODO 自动生成的方法存根
+		String sql="update VCD_t set nownum=nownum-1 where id=?";
+		//数据库设置state默认值为1
+		String sql1="insert into Record_t (userid, vcdid, rentdate, returndate, rentprice, depositprice) values (?,?,?,?,?,?)";
+		Connection conn=DbUtil.getConn();
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			conn.setAutoCommit(false);
+			runner.update(conn, sql, record.getVcdid());
+			runner.update(conn, sql1, record.getUserid(),record.getVcdid(),record.getRentdate(),record.getReturndate(),record.getRentprice(),record.getDepositprice());
+		} catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			if(conn!=null){
+				try {
+					conn.rollback();
+				} catch (Exception e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		}finally{
+			if(conn!=null){
+				try {
+					conn.commit();
+					conn.close();
+				} catch (SQLException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		
 	}
 
 }

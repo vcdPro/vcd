@@ -60,7 +60,8 @@ public class AddVcdFrame extends JInternalFrame {
 				Vcd vcd=new Vcd();
 				vcd.setName(name);
 				nowNumTxt.setText(String.valueOf(service.findVcd(vcd)));
-				
+				JOptionPane.showMessageDialog(null, "该影碟已存在，请前往更新！");
+				resetValue();
 			}
 		});
 		nameTxt.setFont(new Font("宋体", Font.PLAIN, 15));
@@ -129,7 +130,7 @@ public class AddVcdFrame extends JInternalFrame {
 			                }
 			            };
 			            if(ff.accept(file)){
-			              	urlTxt.setText("upload/MV/"+file.getName());
+			              	urlTxt.setText("../upload/MV/"+file.getName());
 							 f.dispose();  
 						}
 			            else{
@@ -184,7 +185,7 @@ public class AddVcdFrame extends JInternalFrame {
 			                }
 			            };
 			            if(ff.accept(file)){
-			            	imageurlTxt.setText("upload/pic/"+file.getName());
+			            	imageurlTxt.setText("../upload/pic/"+file.getName());
 							 f.dispose();  
 						}
 			            else{
