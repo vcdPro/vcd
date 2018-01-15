@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.management.Query;
+
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -249,6 +251,67 @@ public class VcdDaoImp implements VcdDao {
 			}
 		}
 		
+	}
+
+	@Override
+	public Record queryVcd(int id) {
+		// TODO 自动生成的方法存根
+		String sql="select * from Record_t where id=? and state=1";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return runner.query(sql, new BeanHandler<Record>(Record.class),id);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public String getVcdName(int vcdid) {
+		// TODO 自动生成的方法存根
+		String sql="select name from VCD_t where id=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return (String) runner.query(sql, new ScalarHandler(),vcdid);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	@Override
+	public void updateRecord(int id, String name) {
+		// TODO 自动生成的方法存根
+		String sql="update Record_t set state=0 ,rentprice=0,depositprice=0,returndate=GETDATE() where id=?";
+		String sql1="update VCD_t set nownum=nownum+1 where name=?";
+		Connection conn=DbUtil.getConn();
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			conn.setAutoCommit(false);
+			runner.update(conn, sql, id);
+			runner.update(conn, sql1, name);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			if(conn!=null){
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+			}
+		}finally{
+			try {
+				conn.commit();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

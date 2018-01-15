@@ -48,4 +48,13 @@ public interface VcdDao {
 
 	void updateVcdNum(Record record);
 
+
+	Record queryVcd(int id);
+
+
+	String getVcdName(int vcdid);
+
+
+	void updateRecord(int id, String name);
+
 }

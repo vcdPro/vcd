@@ -29,4 +29,8 @@ public interface VcdService {
 
 	public int addRecord(Record record);
 
+	public List queryRecord(int id);
+
+	public void updateRecord(int id, String name);
+
 }

@@ -113,6 +113,13 @@ public class MainFrame extends JFrame {
 		cdbrmenu.add(cdBoItem);
 		
 		JMenuItem menuItem_1 = new JMenuItem("\u5F71\u789F\u5F52\u8FD8");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReturnFrame rf=new ReturnFrame();
+				rf.setVisible(true);
+				desktopPane.add(rf);
+			}
+		});
 		cdbrmenu.add(menuItem_1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

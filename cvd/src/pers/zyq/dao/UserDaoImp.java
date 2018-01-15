@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import pers.zyq.domain.Admin;
 import pers.zyq.domain.User;
@@ -95,6 +96,20 @@ public class UserDaoImp implements UserDao {
 			throw new RuntimeException();
 		}
 		
+	}
+
+	@Override
+	public String getUserName(int userid) {
+		// TODO 自动生成的方法存根
+		String sql="select name from User_t where id=?";
+		QueryRunner runner=new QueryRunner(DbUtil.getSource());
+		try {
+			return (String) runner.query(sql, new ScalarHandler(),userid);
+		} catch (SQLException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
 	}
 
 	

@@ -18,4 +18,6 @@ public interface UserDao {
 
 	public int delUser(int id);
 
+	public String getUserName(int userid);
+
 }

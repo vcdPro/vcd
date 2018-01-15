@@ -1,9 +1,11 @@
 package pers.zyq.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import pers.zyq.dao.UserDao;
 import pers.zyq.dao.VcdDao;
 import pers.zyq.domain.Record;
 import pers.zyq.domain.Vcd;
@@ -123,5 +125,32 @@ public class VcdServiceImp implements VcdService {
 			JOptionPane.showMessageDialog(null, "该影碟已全部借出！");
 			return 0;
 		}
+	}
+	@Override
+	public List queryRecord(int id) {
+		// TODO 自动生成的方法存根
+		Record record=dao.queryVcd(id);
+		UserDao udao=BasicFactory.getFactory().getInstance(UserDao.class);
+		if(record==null){
+			JOptionPane.showMessageDialog(null, "发票号错误！");
+			return null;
+		}
+		String username=udao.getUserName(record.getUserid());
+		String vcdname=dao.getVcdName(record.getVcdid());
+		List list=new ArrayList();
+		list.add(record.getId());
+		list.add(username);
+		list.add(vcdname);
+		list.add(record.getRentprice());
+		list.add(record.getDepositprice());
+		list.add(record.getRentdate());
+		list.add(record.getReturndate());
+		return list;
+	}
+	@Override
+	public void updateRecord(int id, String name) {
+		// TODO 自动生成的方法存根
+		dao.updateRecord(id,name);
+		
 	}
 }
